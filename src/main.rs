@@ -156,7 +156,7 @@ fn main() {
                 for task_index in start_task..end_task {
                     let data :Vec<u8> = data_string_builder(&colmap, &del.as_bytes());
                     buffer.push(data);
-                    if buffer.len() >= 10 || task_index == end_task{
+                    if buffer.len() >= 10 || task_index == end_task - 1 {
                         for data in &mut *buffer {
                             buffered_file.write_all(data).expect("Failed writing data to file");
                             writeln!(buffered_file, "").expect("Failed writing newline to file");
@@ -165,7 +165,7 @@ fn main() {
                         buffer.clear(); // Clear buffer after writing
                     }
                 }
-                info!("Thread index {} tasks completed", thread_index);
+                info!("Thread index {} tasks {} completed", thread_index, end_task-start_task);
             });
             handles.push(handle);
         }
