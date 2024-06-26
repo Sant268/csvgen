@@ -74,7 +74,7 @@ fn main() {
     let mut args = Args::parse();
     info!("Lines: {:?}, \n Columns {:?}\n Delimiter: {:?}\n Filename: {:?}", &args.lines,&args.cols, &args.delimiter,&args.filename);
     if(args.lines < 100 || args.lines / args.threads <= 10 ) {
-        warn!("Forcing single thread as MAX_BUFFER per thread is set as 10, so file will be empty");
+        warn!("Forcing single thread as performance will be fast enough");
         args.threads = 1;
     }
     let max_threads_supported = available_parallelism().expect("Can't query number of threads!");
